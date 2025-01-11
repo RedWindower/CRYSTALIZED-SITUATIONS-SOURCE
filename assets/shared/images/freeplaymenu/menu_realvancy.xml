@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="menu_realvancy.png">
+<SubTexture name="realvancy basic0000" x="0" y="740" width="537" height="194" frameX="-620" frameY="-547" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="realvancy basic0001" x="711" y="370" width="572" height="198" frameX="-616" frameY="-547" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="realvancy basic0002" x="537" y="740" width="542" height="186" frameX="-617" frameY="-555" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="realvancy white0000" x="0" y="0" width="711" height="370" frameX="-552" frameY="-425" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="realvancy white0001" x="711" y="0" width="711" height="370" frameX="-552" frameY="-425" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="realvancy white0002" x="0" y="370" width="711" height="370" frameX="-552" frameY="-425" frameWidth="1920" frameHeight="1080" />
+</TextureAtlas>

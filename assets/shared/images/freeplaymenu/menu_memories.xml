@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="menu_memories.png">
+<SubTexture name="memories basic0000" x="617" y="274" width="560" height="184" frameX="-616" frameY="-561" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="memories basic0001" x="572" y="548" width="548" height="164" frameX="-614" frameY="-577" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="memories basic0002" x="0" y="548" width="572" height="169" frameX="-619" frameY="-570" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="memories white0000" x="0" y="0" width="617" height="274" frameX="-579" frameY="-491" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="memories white0001" x="0" y="274" width="617" height="274" frameX="-579" frameY="-491" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="memories white0002" x="617" y="0" width="617" height="274" frameX="-579" frameY="-491" frameWidth="1920" frameHeight="1080" />
+</TextureAtlas>

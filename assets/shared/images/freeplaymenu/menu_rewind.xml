@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="menu_rewind.png">
+<SubTexture name="rewind basic0000" x="676" y="345" width="468" height="201" frameX="-605" frameY="-545" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="rewind basic0001" x="0" y="690" width="493" height="166" frameX="-621" frameY="-569" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="rewind basic0002" x="493" y="690" width="489" height="156" frameX="-626" frameY="-584" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="rewind white0000" x="0" y="0" width="676" height="345" frameX="-536" frameY="-436" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="rewind white0001" x="676" y="0" width="676" height="345" frameX="-536" frameY="-436" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="rewind white0002" x="0" y="345" width="676" height="345" frameX="-536" frameY="-436" frameWidth="1920" frameHeight="1080" />
+</TextureAtlas>

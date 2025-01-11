@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="menu_plead.png">
+<SubTexture name="plead basic0000" x="629" y="312" width="565" height="224" frameX="-614" frameY="-529" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="plead basic0001" x="0" y="624" width="558" height="217" frameX="-621" frameY="-531" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="plead basic0002" x="558" y="624" width="550" height="204" frameX="-616" frameY="-538" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="plead white0000" x="0" y="0" width="629" height="312" frameX="-583" frameY="-466" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="plead white0001" x="0" y="312" width="629" height="312" frameX="-583" frameY="-466" frameWidth="1920" frameHeight="1080" />
+<SubTexture name="plead white0002" x="629" y="0" width="629" height="312" frameX="-583" frameY="-466" frameWidth="1920" frameHeight="1080" />
+</TextureAtlas>
