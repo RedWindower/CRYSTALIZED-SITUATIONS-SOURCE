@@ -146,6 +146,7 @@ class MainMenuState extends MusicBeatState
 				if (FlxG.keys.justPressed.A)
 					{
 						 selectedSomethin = true;
+						 FlxG.sound.play(Paths.sound('confirmMenu'));
 						 PlayState.SONG = backend.Song.loadFromJson('pipe-down-lil-bro-hard', 'pipe-down-lil-bro'); 
                         LoadingState.loadAndSwitchState(new PlayState());
 					
