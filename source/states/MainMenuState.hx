@@ -143,7 +143,7 @@ class MainMenuState extends MusicBeatState
 					MusicBeatState.switchState(new TitleState());
 				}
 
-				if (FlxG.keys.justPressed.E)
+				if (FlxG.keys.justPressed.A)
 					{
 						 selectedSomethin = true;
 						 PlayState.SONG = backend.Song.loadFromJson('pipe-down-lil-bro-hard', 'pipe-down-lil-bro'); 
