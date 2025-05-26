@@ -1,4 +1,4 @@
-package states;
+package states.difficulty;
 
 import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
@@ -6,24 +6,18 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
-import states.difficulty.DifficultyPlead;
-import states.difficulty.DifficultyMemories;
-import states.difficulty.DifficultyRealvancy;
-import states.difficulty.DifficultyRewind;
 
-class CSFreeplayState extends MusicBeatState
+class DifficultyPlead extends MusicBeatState
 {
-	public static var freeplay:String = 'SONG SELECT'; // This is also used for Discord RPC
-	public static var guide:String = 'PRESS ESC/BACK TO GO BACK TO MAIN MENU';
+	public static var difficulty:String = 'SELECT'; // This is also used for Discord RPC
+	public static var guide:String = 'PRESS ESC/BACK TO GO BACK TO FREEPLAY';
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	var optionShit:Array<String> = [
-		'plead',
-		'memories',
-		'realvancy',
-		'rewind'
+		'hard',
+		'mechanics'
 	];
 
 	var magenta:FlxSprite;
@@ -76,7 +70,7 @@ class CSFreeplayState extends MusicBeatState
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('freeplaymenu/menu_' + optionShit[i]);
+			menuItem.frames = Paths.getSparrowAtlas('difficultymenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
@@ -93,7 +87,7 @@ class CSFreeplayState extends MusicBeatState
 		guide.scrollFactor.set();
 		guide.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(guide);
-		var freeplaytext:FlxText = new FlxText(12, FlxG.height - 24, 0, "FREEPLAY " + freeplay, 12);
+		var freeplaytext:FlxText = new FlxText(12, FlxG.height - 24, 0, "DIFFICULTY " + difficulty, 12);
 		freeplaytext.scrollFactor.set();
 		freeplaytext.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(freeplaytext);
@@ -138,7 +132,7 @@ class CSFreeplayState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new MainMenuState());
+				MusicBeatState.switchState(new FreeplayState());
 			}
 
 			if (controls.ACCEPT)
@@ -159,14 +153,12 @@ class CSFreeplayState extends MusicBeatState
 					{
 						switch (optionShit[curSelected])
 						{
-							case 'plead':
-								MusicBeatState.switchState(new DifficultyPlead());
-							case 'memories':
-								MusicBeatState.switchState(new DifficultyMemories());
-							case 'realvancy':
-								MusicBeatState.switchState(new DifficultyRealvancy());
-							case 'rewind':
-								MusicBeatState.switchState(new DifficultyRewind());
+							case 'hard':
+								PlayState.SONG = backend.Song.loadFromJson('plead-hard', 'plead'); 
+								LoadingState.loadAndSwitchState(new PlayState());
+							case 'mechanics':
+								PlayState.SONG = backend.Song.loadFromJson('plead-mechanics', 'plead'); 
+								LoadingState.loadAndSwitchState(new PlayState());
 						}
 					});
 
