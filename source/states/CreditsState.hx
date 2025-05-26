@@ -39,7 +39,7 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Psych Engine Team'],
+			['Crystalized Situations Team'],
 			['RedWindows',		'windows',		'Main Programmer, Composer Of Title Music, and Head of Crystalized Situations',					 'https://youtube.com/@TheRedWindower',		'FF5733'],
 			['Adam Productions',				'adam',			'2nd Main Head Of Cystalized Situations',						 'https://youtube.com/@adamakestuffOSC',		'33FF90'],
 			['That_PEZDude',		'leo',		'Beta Tester Of Crystalized Situations',					 'https://youtube.com/@that_pezdude',		'CFA81A'],

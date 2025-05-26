@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="SKETCHADAM.png">
+<SubTexture name="i0000" x="0" y="1375" width="433" height="405" frameX="-387" frameY="-304" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0001" x="0" y="958" width="433" height="417" frameX="-386" frameY="-292" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0002" x="439" y="507" width="433" height="427" frameX="-384" frameY="-282" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0003" x="439" y="507" width="433" height="427" frameX="-384" frameY="-282" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0004" x="439" y="507" width="433" height="427" frameX="-384" frameY="-282" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0005" x="439" y="507" width="433" height="427" frameX="-384" frameY="-282" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0000" x="873" y="958" width="481" height="411" frameX="-383" frameY="-294" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0001" x="433" y="958" width="440" height="417" frameX="-406" frameY="-288" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0002" x="1299" y="426" width="433" height="420" frameX="-401" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0003" x="1299" y="426" width="433" height="420" frameX="-401" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0004" x="1299" y="426" width="433" height="420" frameX="-401" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0005" x="1299" y="426" width="433" height="420" frameX="-401" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0000" x="0" y="507" width="439" height="451" frameX="-305" frameY="-238" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0001" x="1299" y="0" width="481" height="426" frameX="-331" frameY="-259" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0002" x="433" y="1375" width="480" height="402" frameX="-358" frameY="-280" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0003" x="433" y="1375" width="480" height="402" frameX="-358" frameY="-280" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0004" x="433" y="1375" width="480" height="402" frameX="-358" frameY="-280" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0005" x="433" y="1375" width="480" height="402" frameX="-358" frameY="-280" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0000" x="0" y="0" width="433" height="507" frameX="-375" frameY="-213" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0001" x="433" y="0" width="433" height="489" frameX="-374" frameY="-228" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0002" x="866" y="0" width="433" height="455" frameX="-374" frameY="-248" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0003" x="866" y="0" width="433" height="455" frameX="-374" frameY="-248" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0004" x="866" y="0" width="433" height="455" frameX="-374" frameY="-248" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0005" x="866" y="0" width="433" height="455" frameX="-374" frameY="-248" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0000" x="0" y="1780" width="520" height="347" frameX="-337" frameY="-356" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0001" x="1780" y="0" width="478" height="368" frameX="-358" frameY="-335" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0002" x="913" y="1375" width="433" height="390" frameX="-382" frameY="-313" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0003" x="913" y="1375" width="433" height="390" frameX="-382" frameY="-313" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0004" x="913" y="1375" width="433" height="390" frameX="-382" frameY="-313" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0005" x="913" y="1375" width="433" height="390" frameX="-382" frameY="-313" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

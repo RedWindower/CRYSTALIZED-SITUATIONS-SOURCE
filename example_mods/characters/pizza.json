@@ -1,0 +1,91 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 12,
+			"name": "i",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-63,
+				24
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "l0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-6,
+				34
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "d0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				-3
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "u0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				30
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "r0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "weave0",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/PIZZA_ASSETS",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "pizza",
+	"flip_x": true,
+	"healthbar_colors": [
+		254,
+		78,
+		99
+	],
+	"camera_position": [
+		-110,
+		160
+	],
+	"sing_duration": 4,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

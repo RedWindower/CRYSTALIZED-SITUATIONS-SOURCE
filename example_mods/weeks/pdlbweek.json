@@ -1,0 +1,32 @@
+{
+	"storyName": "Deletion",
+	"difficulties": "Hard",
+	"hideFreeplay": false,
+	"weekBackground": "stage",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"pipe-down-lil-bro",
+			"adam",
+			[
+				100,
+				255,
+				0
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		"gf"
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "Deletion"
+}

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="PIZZA_GLITCHING_ASSETS.png">
+<SubTexture name="i0000" x="1017" y="1738" width="295" height="363" frameX="-535" frameY="-283" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0001" x="870" y="974" width="305" height="376" frameX="-555" frameY="-270" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0002" x="1158" y="425" width="270" height="388" frameX="-560" frameY="-258" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0003" x="0" y="974" width="280" height="388" frameX="-560" frameY="-258" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0004" x="280" y="974" width="280" height="388" frameX="-560" frameY="-258" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0005" x="560" y="974" width="310" height="388" frameX="-560" frameY="-258" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0000" x="786" y="1362" width="449" height="374" frameX="-361" frameY="-271" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0001" x="385" y="1362" width="401" height="375" frameX="-397" frameY="-270" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0002" x="1544" y="0" width="385" height="376" frameX="-431" frameY="-268" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0003" x="1544" y="376" width="385" height="376" frameX="-431" frameY="-268" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0004" x="1544" y="752" width="385" height="376" frameX="-431" frameY="-268" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0005" x="0" y="1362" width="385" height="376" frameX="-431" frameY="-268" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0000" x="683" y="1738" width="334" height="366" frameX="-496" frameY="-279" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0001" x="0" y="1738" width="326" height="368" frameX="-514" frameY="-277" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0002" x="1175" y="974" width="282" height="369" frameX="-528" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0003" x="1235" y="1362" width="292" height="369" frameX="-528" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0004" x="1527" y="1362" width="332" height="369" frameX="-528" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0005" x="1929" y="0" width="260" height="369" frameX="-528" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0000" x="0" y="0" width="386" height="508" frameX="-460" frameY="-182" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0001" x="386" y="0" width="386" height="474" frameX="-460" frameY="-197" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0002" x="772" y="0" width="386" height="466" frameX="-460" frameY="-197" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0003" x="0" y="508" width="386" height="466" frameX="-460" frameY="-197" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0004" x="386" y="508" width="386" height="466" frameX="-460" frameY="-197" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0005" x="772" y="508" width="386" height="466" frameX="-460" frameY="-197" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0000" x="643" y="2106" width="303" height="330" frameX="-527" frameY="-373" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0001" x="311" y="2106" width="332" height="345" frameX="-528" frameY="-358" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0002" x="1312" y="1738" width="301" height="355" frameX="-529" frameY="-348" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0003" x="1613" y="1738" width="291" height="355" frameX="-529" frameY="-348" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0004" x="2189" y="0" width="301" height="355" frameX="-529" frameY="-348" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0005" x="0" y="2106" width="311" height="355" frameX="-529" frameY="-348" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l_miss0000" x="326" y="1738" width="357" height="368" frameX="-431" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r_miss0000" x="1929" y="369" width="260" height="369" frameX="-528" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u_miss0000" x="1158" y="0" width="386" height="425" frameX="-460" frameY="-238" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d_miss0000" x="2189" y="355" width="257" height="355" frameX="-529" frameY="-348" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

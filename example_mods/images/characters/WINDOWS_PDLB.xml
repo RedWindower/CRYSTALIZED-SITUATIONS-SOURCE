@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="WINDOWS_PDLB.png">
+<SubTexture name="left bounce0000" x="0" y="0" width="409" height="398" frameX="-435" frameY="-265" frameWidth="1280" frameHeight="720" />
+<SubTexture name="left bounce0001" x="0" y="398" width="391" height="381" frameX="-465" frameY="-282" frameWidth="1280" frameHeight="720" />
+<SubTexture name="left bounce0002" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="left bounce0003" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="left bounce0004" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="left bounce0005" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="right bounce0000" x="409" y="0" width="436" height="387" frameX="-481" frameY="-276" frameWidth="1280" frameHeight="720" />
+<SubTexture name="right bounce0001" x="845" y="0" width="400" height="377" frameX="-488" frameY="-286" frameWidth="1280" frameHeight="720" />
+<SubTexture name="right bounce0002" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="right bounce0003" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="right bounce0004" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+<SubTexture name="right bounce0005" x="391" y="398" width="384" height="378" frameX="-497" frameY="-285" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>
