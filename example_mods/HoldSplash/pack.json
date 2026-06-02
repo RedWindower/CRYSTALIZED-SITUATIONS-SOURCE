@@ -1,0 +1,7 @@
+{
+	"name": "Sustain Hold Splashes",
+	"description": "Adds the sustained note splash animation from the base game",
+	"restart": false,
+	"runsGlobally": true,
+	"color": [140, 75, 154]
+}

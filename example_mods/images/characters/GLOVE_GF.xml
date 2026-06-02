@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="GLOVE_GF.png">
+<SubTexture name="i0000" x="0" y="120" width="1066" height="34" frameX="-111" frameY="-625" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0001" x="0" y="70" width="1066" height="50" frameX="-111" frameY="-606" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0002" x="0" y="0" width="1066" height="70" frameX="-111" frameY="-585" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0003" x="0" y="0" width="1066" height="70" frameX="-111" frameY="-585" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0004" x="0" y="0" width="1066" height="70" frameX="-111" frameY="-585" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0005" x="0" y="0" width="1066" height="70" frameX="-111" frameY="-585" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

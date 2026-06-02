@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="BLUE_CAT_DEAD.png">
+<SubTexture name="death10000" x="1280" y="0" width="816" height="579" frameX="-191" frameY="-60" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10001" x="0" y="720" width="650" height="461" frameX="-274" frameY="-119" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10002" x="1389" y="720" width="460" height="327" frameX="-369" frameY="-186" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10003" x="1478" y="1181" width="266" height="189" frameX="-466" frameY="-255" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10004" x="1280" y="579" width="110" height="79" frameX="-544" frameY="-310" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10005" x="1390" y="579" width="38" height="27" frameX="-580" frameY="-336" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10006" x="1428" y="579" width="4" height="3" frameX="-597" frameY="-348" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10007" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10008" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10009" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10010" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death10011" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death20000" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death20001" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death20002" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death20003" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death20004" x="0" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30000" x="739" y="1466" width="739" height="151" frameX="-257" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30001" x="0" y="1466" width="739" height="209" frameX="-242" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30002" x="739" y="1181" width="739" height="255" frameX="-239" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30003" x="0" y="1181" width="739" height="285" frameX="-246" frameY="0" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30004" x="650" y="720" width="739" height="332" frameX="-261" frameY="-7" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30005" x="650" y="720" width="739" height="332" frameX="-261" frameY="-115" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30006" x="650" y="720" width="739" height="332" frameX="-257" frameY="-272" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30007" x="650" y="720" width="739" height="332" frameX="-257" frameY="-272" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30008" x="650" y="720" width="739" height="332" frameX="-257" frameY="-272" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30009" x="650" y="720" width="739" height="332" frameX="-257" frameY="-272" frameWidth="1280" frameHeight="720" />
+<SubTexture name="death30010" x="650" y="720" width="739" height="332" frameX="-257" frameY="-272" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

@@ -1,0 +1,232 @@
+package backend;
+
+import flixel.FlxG;
+import flixel.FlxState;
+import openfl.events.Event;
+import openfl.media.Video;
+import openfl.net.NetConnection;
+import openfl.net.NetStream;
+import vlc.VlcBitmap;
+import states.MainMenuState;
+
+// THIS IS FOR TESTING
+// DONT STEAL MY CODE >:(
+class MP4Handler
+{
+	public static var video:Video;
+	public static var netStream:NetStream;
+	public static var finishCallback:FlxState;
+	public static var inlineFinish:Void->Void;
+
+	#if desktop
+	public static var vlcBitmap:VlcBitmap;
+	#end
+
+	public function new()
+	{
+		FlxG.autoPause = false;
+
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.stop();
+		}
+	}
+
+	public function playMP4(path:String, callback:FlxState, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
+	{
+		#if html5
+		FlxG.autoPause = false;
+
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.stop();
+		}
+
+		finishCallback = callback;
+
+		video = new Video();
+		video.x = 0;
+		video.y = 0;
+
+		FlxG.addChildBelowMouse(video);
+
+		var nc = new NetConnection();
+		nc.connect(null);
+
+		netStream = new NetStream(nc);
+		netStream.client = {onMetaData: client_onMetaData};
+
+		nc.addEventListener("netStatus", netConnection_onNetStatus);
+
+		netStream.play(path);
+		#else
+		finishCallback = callback;
+
+		vlcBitmap = new VlcBitmap();
+		layoutVlcBitmap();
+		vlcBitmap.visible = true;
+		vlcBitmap.alpha = 1;
+		vlcBitmap.smoothing = true;
+		vlcBitmap.cacheAsBitmap = true;
+
+
+		trace("Setting width to " + vlcBitmap.width);
+		trace("Setting height to " + vlcBitmap.height);
+
+		vlcBitmap.onVideoReady = onVLCVideoReady;
+		vlcBitmap.onComplete = onVLCComplete;
+		vlcBitmap.onError = onVLCError;
+
+		FlxG.stage.addEventListener(Event.ENTER_FRAME, update);
+
+		if (repeat)
+			vlcBitmap.repeat = -1;
+		else
+			vlcBitmap.repeat = 0;
+
+		vlcBitmap.inWindow = isWindow;
+		vlcBitmap.fullscreen = isFullscreen;
+
+		FlxG.stage.addChildAt(vlcBitmap, FlxG.stage.numChildren);
+		vlcBitmap.play(checkFile(path));
+		#end
+	}
+
+	public function playMP4Inline(path:String, onFinish:Void->Void, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
+	{
+		inlineFinish = onFinish;
+		playMP4(path, null, repeat, isWindow, isFullscreen);
+	}
+
+	#if desktop
+	function checkFile(fileName:String):String
+	{
+		var pDir = "";
+		var appDir = "file:///" + Sys.getCwd() + "/";
+
+		if (fileName.indexOf(":") == -1) // Not a path
+			pDir = appDir;
+		else if (fileName.indexOf("file://") == -1 || fileName.indexOf("http") == -1) // C:, D: etc? ..missing "file:///" ?
+			pDir = "file:///";
+
+		return pDir + fileName;
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////
+
+	function onVLCVideoReady()
+	{
+		trace("video loaded!");
+		layoutVlcBitmap();
+		vlcBitmap.visible = true;
+		vlcBitmap.alpha = 1;
+	}
+
+	public function onVLCComplete()
+	{
+		vlcBitmap.stop();
+		cleanupDesktop();
+
+		// Clean player, just in case! Actually no.
+
+		trace("Big, Big Chungus, Big Chungus!");
+
+		finishPlayback();
+	}
+
+	function onVLCError()
+	{
+		cleanupDesktop();
+		finishPlayback();
+	}
+
+	function update(e:Event)
+	{
+		vlcBitmap.volume = FlxG.sound.volume; // shitty volume fix
+	}
+
+	function layoutVlcBitmap():Void
+	{
+		if (vlcBitmap == null || FlxG.stage == null)
+			return;
+		vlcBitmap.width = FlxG.stage.stageWidth;
+		vlcBitmap.height = FlxG.stage.stageHeight;
+		vlcBitmap.x = (FlxG.stage.stageWidth - vlcBitmap.width) / 2;
+		vlcBitmap.y = (FlxG.stage.stageHeight - vlcBitmap.height) / 2;
+	}
+	#end
+
+	/////////////////////////////////////////////////////////////////////////////////////
+
+	function client_onMetaData(path)
+	{
+		video.attachNetStream(netStream);
+
+		video.width = FlxG.width;
+		video.height = FlxG.height;
+	}
+
+	function netConnection_onNetStatus(path)
+	{
+		if (path.info.code == "NetStream.Play.Complete")
+		{
+			finishVideo();
+		}
+	}
+
+	function finishVideo()
+	{
+		netStream.dispose();
+
+		if (FlxG.game.contains(video))
+		{
+			FlxG.game.removeChild(video);
+		}
+
+		finishPlayback();
+	}
+
+	function finishPlayback():Void
+	{
+		if (inlineFinish != null)
+		{
+			var cb = inlineFinish;
+			inlineFinish = null;
+			cb();
+			return;
+		}
+		if (finishCallback != null)
+		{
+			LoadingState.loadAndSwitchState(finishCallback);
+		}
+		else
+		{
+			LoadingState.loadAndSwitchState(new MainMenuState());
+		}
+	}
+
+	#if desktop
+	function cleanupDesktop():Void
+	{
+		FlxG.stage.removeEventListener(Event.ENTER_FRAME, update);
+		if (vlcBitmap != null && FlxG.stage.contains(vlcBitmap))
+		{
+			FlxG.stage.removeChild(vlcBitmap);
+		}
+	}
+	#end
+
+	// old html5 player
+	/*
+		var nc:NetConnection = new NetConnection();
+		nc.connect(null);
+		var ns:NetStream = new NetStream(nc);
+		var myVideo:Video = new Video();
+		myVideo.width = FlxG.width;
+		myVideo.height = FlxG.height;
+		myVideo.attachNetStream(ns);
+		ns.play(path);
+		return myVideo;
+		ns.close();
+	 */
+}

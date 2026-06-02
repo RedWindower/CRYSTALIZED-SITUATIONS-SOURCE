@@ -1,0 +1,59 @@
+{
+	"storyName": "Deletion",
+	"difficulties": "Hard, Mechanics",
+	"hideFreeplay": false,
+	"weekBackground": "deletion",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"songs": [
+		[
+			"plead",
+			"adamdel",
+			[
+				100,
+				255,
+				0
+			]
+		],
+		[
+			"memories",
+			"adamdel",
+			[
+				100,
+				255,
+				0
+			]
+		],
+		[
+			"realvancy",
+			"adamdel",
+			[
+				100,
+				255,
+				0
+			]
+		],
+		[
+			"rewind",
+			"adamdel",
+			[
+				100,
+				255,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Deletion",
+	"hiddenUntilUnlocked": false
+}
