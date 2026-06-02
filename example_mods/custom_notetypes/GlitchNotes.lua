@@ -1,6 +1,6 @@
 local activeEffect = nil
 local effectTimerTag = 'glitchEffectEnd'
-local effectDuration = 4
+local effectDuration = 999
 local pizzaglitch = 'pizzaglitch'
 local bfOriginalChar = nil
 local bfSwapActive = false
@@ -235,7 +235,7 @@ end
 
 function onUpdate(elapsed)
 	if activeEffect == 'window_spin' then
-		windowAngle = windowAngle + elapsed * 2
+		windowAngle = windowAngle + elapsed * 10
 		local x = windowBaseX + math.cos(windowAngle) * windowRadius
 		local y = windowBaseY + math.sin(windowAngle) * windowRadius
 		setPropertyFromClass('openfl.Lib', 'application.window.x', math.floor(x))

@@ -34,6 +34,7 @@ class MP4Handler
 
 	public function playMP4(path:String, callback:FlxState, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
 	{
+		inlineFinish = null;
 		#if html5
 		FlxG.autoPause = false;
 
@@ -63,15 +64,16 @@ class MP4Handler
 		finishCallback = callback;
 
 		vlcBitmap = new VlcBitmap();
-		layoutVlcBitmap();
+		vlcBitmap.height = FlxG.stage.stageHeight;
+        vlcBitmap.width = FlxG.stage.stageHeight * (16 / 9);
+		vlcBitmap.x = (FlxG.stage.stageWidth - vlcBitmap.width) / 2;
+		vlcBitmap.y = (FlxG.stage.stageHeight - vlcBitmap.height) / 2;
 		vlcBitmap.visible = true;
 		vlcBitmap.alpha = 1;
-		vlcBitmap.smoothing = true;
-		vlcBitmap.cacheAsBitmap = true;
 
 
-		trace("Setting width to " + vlcBitmap.width);
-		trace("Setting height to " + vlcBitmap.height);
+		trace("Setting width to " + FlxG.stage.stageHeight * (16 / 9));
+		trace("Setting height to " + FlxG.stage.stageHeight);
 
 		vlcBitmap.onVideoReady = onVLCVideoReady;
 		vlcBitmap.onComplete = onVLCComplete;
@@ -117,9 +119,6 @@ class MP4Handler
 	function onVLCVideoReady()
 	{
 		trace("video loaded!");
-		layoutVlcBitmap();
-		vlcBitmap.visible = true;
-		vlcBitmap.alpha = 1;
 	}
 
 	public function onVLCComplete()
@@ -131,13 +130,33 @@ class MP4Handler
 
 		trace("Big, Big Chungus, Big Chungus!");
 
-		finishPlayback();
+		if (inlineFinish != null)
+		{
+			var cb = inlineFinish;
+			inlineFinish = null;
+			cb();
+			return;
+		}
+		if (finishCallback != null)
+		{
+			LoadingState.loadAndSwitchState(finishCallback);
+		}
 	}
 
 	function onVLCError()
 	{
 		cleanupDesktop();
-		finishPlayback();
+		if (inlineFinish != null)
+		{
+			var cb = inlineFinish;
+			inlineFinish = null;
+			cb();
+			return;
+		}
+		if (finishCallback != null)
+		{
+			LoadingState.loadAndSwitchState(finishCallback);
+		}
 	}
 
 	function update(e:Event)
@@ -145,14 +164,13 @@ class MP4Handler
 		vlcBitmap.volume = FlxG.sound.volume; // shitty volume fix
 	}
 
-	function layoutVlcBitmap():Void
+	function cleanupDesktop():Void
 	{
-		if (vlcBitmap == null || FlxG.stage == null)
-			return;
-		vlcBitmap.width = FlxG.stage.stageWidth;
-		vlcBitmap.height = FlxG.stage.stageHeight;
-		vlcBitmap.x = (FlxG.stage.stageWidth - vlcBitmap.width) / 2;
-		vlcBitmap.y = (FlxG.stage.stageHeight - vlcBitmap.height) / 2;
+		FlxG.stage.removeEventListener(Event.ENTER_FRAME, update);
+		if (vlcBitmap != null && FlxG.stage.contains(vlcBitmap))
+		{
+			FlxG.stage.removeChild(vlcBitmap);
+		}
 	}
 	#end
 
@@ -183,11 +201,6 @@ class MP4Handler
 			FlxG.game.removeChild(video);
 		}
 
-		finishPlayback();
-	}
-
-	function finishPlayback():Void
-	{
 		if (inlineFinish != null)
 		{
 			var cb = inlineFinish;
@@ -200,21 +213,8 @@ class MP4Handler
 			LoadingState.loadAndSwitchState(finishCallback);
 		}
 		else
-		{
 			LoadingState.loadAndSwitchState(new MainMenuState());
-		}
 	}
-
-	#if desktop
-	function cleanupDesktop():Void
-	{
-		FlxG.stage.removeEventListener(Event.ENTER_FRAME, update);
-		if (vlcBitmap != null && FlxG.stage.contains(vlcBitmap))
-		{
-			FlxG.stage.removeChild(vlcBitmap);
-		}
-	}
-	#end
 
 	// old html5 player
 	/*
