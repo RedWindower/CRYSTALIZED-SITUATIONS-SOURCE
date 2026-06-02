@@ -452,25 +452,28 @@ class MainMenuState extends MusicBeatState
 			FlxG.save.flush();
 		}
 		maybeUnlockExtrasMenu();
-		curDifficulty = getDefaultDifficultyIndex();
+		curDifficulty = getHardDifficultyIndex();
 		startSecretSong(realitySongName);
 	}
 
-	function getDefaultDifficultyIndex():Int
+	function getHardDifficultyIndex():Int
 	{
 		if (Difficulty.list.length <= 0)
 			return 0;
-		var defaultName:String = Difficulty.getDefault();
-		var defaultIndex:Int = Difficulty.list.indexOf(defaultName);
-		if (defaultIndex < 0)
-			defaultIndex = 0;
-		return defaultIndex;
+		for (i in 0...Difficulty.list.length)
+		{
+			if (Difficulty.list[i].toLowerCase() == 'hard')
+				return i;
+		}
+		return Difficulty.list.length - 1;
 	}
 
 	function startSecretSong(songName:String):Void
 	{
 		selectedSomethin = true;
 		var songLowercase:String = Paths.formatToSongPath(songName);
+		if (isHardOnlySong(songLowercase))
+			curDifficulty = getHardDifficultyIndex();
 		var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
 		try
 		{
@@ -489,6 +492,11 @@ class MainMenuState extends MusicBeatState
 			selectedSomethin = false;
 			showErrorOverlay('Failed to load secret song.\n' + e);
 		}
+	}
+
+	function isHardOnlySong(songName:String):Bool
+	{
+		return songName == 'reality' || songName == 'pipe-down-lil-bro';
 	}
 
 	function confirmSelection():Void

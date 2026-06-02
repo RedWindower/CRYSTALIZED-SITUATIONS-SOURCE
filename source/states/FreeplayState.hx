@@ -523,6 +523,11 @@ class FreeplayState extends MusicBeatState
 	{
 		if (player.playingMusic)
 			return;
+		if (isHardOnlySong(songs[curSelected].songName))
+		{
+			applyHardOnlyDifficulty();
+			return;
+		}
 
 		curDifficulty += change;
 
@@ -611,7 +616,36 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 0;
 
 		changeDiff();
+		applyHardOnlyDifficulty();
 		_updateSongLastDifficulty();
+	}
+
+	function applyHardOnlyDifficulty():Void
+	{
+		curDifficulty = getHardDifficultyIndex();
+		lastDifficultyName = Difficulty.getString(curDifficulty);
+		diffText.text = lastDifficultyName.toUpperCase();
+		positionHighscore();
+		missingText.visible = false;
+		missingTextBG.visible = false;
+	}
+
+	function getHardDifficultyIndex():Int
+	{
+		if (Difficulty.list.length <= 0)
+			return 0;
+		for (i in 0...Difficulty.list.length)
+		{
+			if (Difficulty.list[i].toLowerCase() == 'hard')
+				return i;
+		}
+		return Difficulty.list.length - 1;
+	}
+
+	function isHardOnlySong(songName:String):Bool
+	{
+		var name = songName.toLowerCase();
+		return name == 'reality' || name == 'pipe-down-lil-bro';
 	}
 
 	inline private function _updateSongLastDifficulty()

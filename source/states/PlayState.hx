@@ -902,19 +902,47 @@ class PlayState extends MusicBeatState
 		});
 
 		#if desktop
+		#if (hxCodec >= "2.6.0")
+		var video:VideoHandler = new VideoHandler();
+			#if (hxCodec >= "3.0.0")
+			// Recent versions
+			video.cameras = [camOther != null ? camOther : FlxG.camera];
+			add(video);
+			video.play(filepath);
+			video.onEndReached.add(function()
+			{
+				video.dispose();
+				remove(video, true);
+				startAndEnd();
+				return;
+			}, true);
+			#else
+			// Older versions
+			video.playVideo(filepath);
+			video.finishCallback = function()
+			{
+				startAndEnd();
+				return;
+			}
+			#end
+		#else
 		var video = new backend.MP4Handler();
 		video.playMP4Inline(filepath, function()
 		{
 			startAndEnd();
 		});
+		#end
 		#else
 		var video:VideoHandler = new VideoHandler();
 			#if (hxCodec >= "3.0.0")
 			// Recent versions
+			video.cameras = [camOther != null ? camOther : FlxG.camera];
+			add(video);
 			video.play(filepath);
 			video.onEndReached.add(function()
 			{
 				video.dispose();
+				remove(video, true);
 				startAndEnd();
 				return;
 			}, true);
