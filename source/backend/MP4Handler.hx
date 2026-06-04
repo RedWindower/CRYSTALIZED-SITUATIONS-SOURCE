@@ -34,7 +34,8 @@ class MP4Handler
 
 	public function playMP4(path:String, callback:FlxState, ?repeat:Bool = false, ?isWindow:Bool = false, ?isFullscreen:Bool = false):Void
 	{
-		inlineFinish = null;
+		if (callback != null)
+			inlineFinish = null;
 		#if html5
 		FlxG.autoPause = false;
 
