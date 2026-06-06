@@ -119,6 +119,7 @@ class FreeplayState extends MusicBeatState
 			grpSongs.add(songText);
 
 			songText.scaleX = Math.min(1, 980 / songText.width);
+			songText.startPosition.x = FlxG.width * 0.5 - songText.width * 0.5;
 			songText.snapToPosition();
 
 			Mods.currentModDirectory = songs[i].folder;
@@ -515,6 +516,22 @@ class FreeplayState extends MusicBeatState
 			if (!hasReality)
 			{
 				addSong('reality', 0, 'bf-pixel', FlxColor.fromRGB(0, 213, 255));
+			}
+		}
+		if (FlxG.save.data.nerdUnlock == true)
+		{
+			var hasNerd:Bool = false;
+			for (songMeta in songs)
+			{
+				if (songMeta.songName.toLowerCase() == 'nerd')
+				{
+					hasNerd = true;
+					break;
+				}
+			}
+			if (!hasNerd)
+			{
+				addSong('nerd', 0, 'nerd', FlxColor.fromRGB(255, 255, 0));
 			}
 		}
 	}

@@ -2440,6 +2440,12 @@ class PlayState extends MusicBeatState
 
 			if (isStoryMode)
 			{
+				if (!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay') && songName == 'realvancy' && songMisses < 1)
+				{
+					FlxG.save.data.nerdUnlockEligible = true;
+					FlxG.save.flush();
+				}
+
 				campaignScore += songScore;
 				campaignMisses += songMisses;
 

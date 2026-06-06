@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="nerd_emoji.png">
+<SubTexture name="i0000" x="933" y="1291" width="464" height="230" frameX="-404" frameY="-431" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0001" x="469" y="1291" width="464" height="332" frameX="-406" frameY="-326" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0002" x="1704" y="556" width="464" height="464" frameX="-405" frameY="-190" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0003" x="1704" y="556" width="464" height="464" frameX="-405" frameY="-190" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0004" x="1704" y="556" width="464" height="464" frameX="-405" frameY="-190" frameWidth="1280" frameHeight="720" />
+<SubTexture name="i0005" x="1704" y="556" width="464" height="464" frameX="-405" frameY="-190" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0000" x="573" y="0" width="584" height="603" frameX="-446" frameY="-86" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0001" x="1157" y="0" width="547" height="593" frameX="-465" frameY="-91" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0002" x="1144" y="713" width="481" height="557" frameX="-498" frameY="-109" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0003" x="1144" y="713" width="481" height="557" frameX="-498" frameY="-109" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0004" x="1144" y="713" width="481" height="557" frameX="-498" frameY="-109" frameWidth="1280" frameHeight="720" />
+<SubTexture name="r0005" x="1144" y="713" width="481" height="557" frameX="-498" frameY="-109" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0000" x="0" y="713" width="578" height="578" frameX="-242" frameY="-81" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0001" x="578" y="713" width="566" height="576" frameX="-248" frameY="-82" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0002" x="1704" y="0" width="536" height="556" frameX="-263" frameY="-92" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0003" x="1704" y="0" width="536" height="556" frameX="-263" frameY="-92" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0004" x="1704" y="0" width="536" height="556" frameX="-263" frameY="-92" frameWidth="1280" frameHeight="720" />
+<SubTexture name="l0005" x="1704" y="0" width="536" height="556" frameX="-263" frameY="-92" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0000" x="0" y="0" width="191" height="713" frameX="-530" frameY="-7" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0001" x="191" y="0" width="191" height="688" frameX="-530" frameY="-25" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0002" x="382" y="0" width="191" height="660" frameX="-530" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0003" x="382" y="0" width="191" height="660" frameX="-530" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0004" x="382" y="0" width="191" height="660" frameX="-530" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="u0005" x="382" y="0" width="191" height="660" frameX="-530" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0000" x="1397" y="1291" width="469" height="193" frameX="-423" frameY="-503" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0001" x="1704" y="1020" width="469" height="265" frameX="-419" frameY="-436" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0002" x="0" y="1291" width="469" height="333" frameX="-418" frameY="-376" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0003" x="0" y="1291" width="469" height="333" frameX="-418" frameY="-376" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0004" x="0" y="1291" width="469" height="333" frameX="-418" frameY="-376" frameWidth="1280" frameHeight="720" />
+<SubTexture name="d0005" x="0" y="1291" width="469" height="333" frameX="-418" frameY="-376" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

@@ -15,6 +15,15 @@ class CreditsState extends MusicBeatState
 	var intendedColor:FlxColor;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
+	var teaseOverlay:FlxSprite;
+	var teaseText:FlxText;
+	var teaseAlpha:Float = 0;
+	var hazeQuestionPrefixWidth:Float = 0;
+	var hazeQuestionWidth:Float = 0;
+	var hazeQuestionStartX:Float = -1;
+	var hazeQuestionEndX:Float = -1;
+	var hazeQuestionStartY:Float = -1;
+	var hazeQuestionEndY:Float = -1;
 
 	var offsetThing:Float = -75;
 
@@ -40,10 +49,11 @@ class CreditsState extends MusicBeatState
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Crystalized Situations Team'],
-			['RedWindows',		'windows',		'Main Programmer, Composer Of Title Music, and Head of Crystalized Situations',					 'https://youtube.com/@TheRedWindower',		'FF5733'],
+			['RedWindows',		'windows',		'Main Programmer, Composer, and Head of Crystalized Situations',					 'https://youtube.com/@TheRedWindower',		'FF5733'],
 			['Adam Productions',				'adam',			'2nd Main Head Of Cystalized Situations',						 'https://youtube.com/@adamakestuffOSC',		'33FF90'],
 			['That_PEZDude',		'leo',		'Beta Tester Of Crystalized Situations',					 'https://youtube.com/@that_pezdude',		'CFA81A'],
 			['SamuelTheAnimator',				'samuel',			'Composer Of Cystalized Situations',						 'https://youtube.com/@skittlethingthatcantalkthing',		'8EE724'],
+			['Haze',				'haze',			'Tester For 1.5h Update And Creator Of ???',						 'https://youtube.com/@TheRedWindower',		'575757'],
 			[''],
 			['Special Thanks'],
 			['SquidBowl',		'squidbowl',		'Gallery Code',					 'https://gamebanana.com/members/2041479',		'C6B11E'],
@@ -134,6 +144,18 @@ class CreditsState extends MusicBeatState
 		descBox.sprTracker = descText;
 		add(descText);
 
+		teaseOverlay = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		teaseOverlay.scrollFactor.set();
+		teaseOverlay.alpha = 0;
+		add(teaseOverlay);
+
+		teaseText = new FlxText(0, 0, FlxG.width, 'find out in the next update!', 36);
+		teaseText.setFormat(Paths.font("vcr.ttf"), 36, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		teaseText.scrollFactor.set();
+		teaseText.screenCenter();
+		teaseText.alpha = 0;
+		add(teaseText);
+
 		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
@@ -214,6 +236,8 @@ class CreditsState extends MusicBeatState
 				}
 			}
 		}
+
+		updateHazeTeaseOverlay(elapsed);
 		super.update(elapsed);
 	}
 
@@ -266,6 +290,59 @@ class CreditsState extends MusicBeatState
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
+		refreshHazeQuestionHitbox();
+	}
+
+	function updateHazeTeaseOverlay(elapsed:Float):Void
+	{
+		var hoveringQuestion:Bool = isHoveringHazeQuestion();
+		var fadeSpeed:Float = elapsed * 4;
+		if (hoveringQuestion)
+			teaseAlpha = Math.min(1, teaseAlpha + fadeSpeed);
+		else
+			teaseAlpha = Math.max(0, teaseAlpha - fadeSpeed);
+
+		teaseOverlay.alpha = teaseAlpha * 0.5;
+		teaseText.alpha = teaseAlpha;
+	}
+
+	function refreshHazeQuestionHitbox():Void
+	{
+		hazeQuestionStartX = -1;
+		hazeQuestionEndX = -1;
+		hazeQuestionStartY = -1;
+		hazeQuestionEndY = -1;
+
+		if (creditsStuff[curSelected][0] != 'Haze_Art') return;
+		var desc:String = creditsStuff[curSelected][2];
+		var questionIndex:Int = desc.indexOf('???');
+		if (questionIndex < 0) return;
+
+		var before:String = desc.substring(0, questionIndex);
+		var beforeText:FlxText = new FlxText(0, 0, 0, before, 32);
+		beforeText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
+		hazeQuestionPrefixWidth = beforeText.width;
+		beforeText.destroy();
+
+		var questionText:FlxText = new FlxText(0, 0, 0, '???', 32);
+		questionText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
+		hazeQuestionWidth = questionText.width;
+		questionText.destroy();
+
+		var fullWidth:Float = descText.textField != null ? descText.textField.textWidth : descText.width;
+		var textStartX:Float = descText.x + (descText.fieldWidth - fullWidth) * 0.5;
+		hazeQuestionStartX = textStartX + hazeQuestionPrefixWidth;
+		hazeQuestionEndX = hazeQuestionStartX + hazeQuestionWidth;
+		hazeQuestionStartY = descText.y;
+		hazeQuestionEndY = descText.y + descText.height;
+	}
+
+	function isHoveringHazeQuestion():Bool
+	{
+		if (hazeQuestionStartX < 0 || hazeQuestionStartY < 0) return false;
+		var mx:Float = FlxG.mouse.x;
+		var my:Float = FlxG.mouse.y;
+		return mx >= hazeQuestionStartX && mx <= hazeQuestionEndX && my >= hazeQuestionStartY && my <= hazeQuestionEndY;
 	}
 
 	#if MODS_ALLOWED

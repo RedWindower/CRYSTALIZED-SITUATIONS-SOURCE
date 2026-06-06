@@ -2,7 +2,6 @@ package states;
 
 import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
 import backend.WeekData;
@@ -20,9 +19,11 @@ class MainMenuState extends MusicBeatState
 
 	static inline var ellaUnlockCode:String = 'ELLA';
 	static inline var realityUnlockCode:String = 'REALITY';
+	static inline var nerdUnlockCode:String = 'NERD';
 	static inline var ellaSongDisplay:String = 'PIPE-DOWN-LIL-BRO';
 	static inline var realitySongName:String = 'reality';
-	static inline var ellaSongDescription:String = 'A secret track now available in Freeplay.';
+	static inline var nerdSongName:String = 'nerd';
+	static inline var ellaSongDescription:String = 'its in the extras menu go check';
 	static inline var ellaRequiredWeek:String = 'deletion';
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -96,7 +97,8 @@ class MainMenuState extends MusicBeatState
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
-		if ((FlxG.save.data.ellaUnlock == true || FlxG.save.data.realityUnlock == true) && FlxG.save.data.extrasUnlocked != true)
+		maybeBackfillNerdEligibility();
+		if ((FlxG.save.data.ellaUnlock == true || FlxG.save.data.realityUnlock == true || FlxG.save.data.nerdUnlock == true) && FlxG.save.data.extrasUnlocked != true)
 		{
 			FlxG.save.data.extrasUnlocked = true;
 			FlxG.save.flush();
@@ -204,6 +206,11 @@ class MainMenuState extends MusicBeatState
 					if (ellaKeysBuffer.contains(realityUnlockCode))
 					{
 						handleRealityUnlock();
+						ellaKeysBuffer = '';
+					}
+					else if (ellaKeysBuffer.contains(nerdUnlockCode))
+					{
+						handleNerdUnlock();
 						ellaKeysBuffer = '';
 					}
 					else if (ellaKeysBuffer.contains(ellaUnlockCode))
@@ -366,6 +373,37 @@ class MainMenuState extends MusicBeatState
 		}
 	}
 
+	function maybeBackfillNerdEligibility():Void
+	{
+		if (FlxG.save.data.nerdUnlockEligible == true || FlxG.save.data.nerdUnlock == true)
+			return;
+
+		var weekCompleted:Map<String, Bool> = cast FlxG.save.data.weekCompleted;
+		var deletionCompleted:Bool = weekCompleted != null && weekCompleted.exists('deletion') && weekCompleted.get('deletion');
+		if (!deletionCompleted)
+			return;
+
+		var hasLegacyRealvancyScore:Bool = false;
+		var songScores:Map<String, Int> = cast FlxG.save.data.songScores;
+		if (songScores != null)
+		{
+			for (key => score in songScores)
+			{
+				if (score > 0 && key != null && key.indexOf('realvancy') == 0)
+				{
+					hasLegacyRealvancyScore = true;
+					break;
+				}
+			}
+		}
+
+		if (hasLegacyRealvancyScore)
+		{
+			FlxG.save.data.nerdUnlockEligible = true;
+			FlxG.save.flush();
+		}
+	}
+
 	function showEllaHintOverlay():Void
 	{
 		if (hintOverlayActive) return;
@@ -379,7 +417,7 @@ class MainMenuState extends MusicBeatState
 		FlxTween.tween(hintOverlay, {alpha: 0.5}, 0.25, {ease: FlxEase.quadOut});
 
 		hintText = new FlxText(0, 0, FlxG.width,
-			'Type in ELLA in the main menu for a surprise!', 24);
+			'Type in ELLA for a surprise!', 24);
 		hintText.scrollFactor.set();
 		hintText.setFormat('VCR OSD Mono', 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		hintText.alpha = 0;
@@ -420,7 +458,7 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
-	function showEllaLockedOverlay():Void
+	function showEllaLockedOverlay(?message:String):Void
 	{
 		if (hintOverlayActive) return;
 		hintOverlayActive = true;
@@ -431,8 +469,12 @@ class MainMenuState extends MusicBeatState
 		hintOverlay.alpha = 0.5;
 		add(hintOverlay);
 
+		var hintMessage:String = message;
+		if (hintMessage == null)
+			hintMessage = 'UH OH!\n\nYou must beat the ' + ellaRequiredWeek.toUpperCase() + ' week first.';
+
 		hintText = new FlxText(0, 0, FlxG.width,
-			'UH OH!\n\nYou must beat the ' + ellaRequiredWeek.toUpperCase() + ' week first.', 24);
+			hintMessage, 24);
 		hintText.scrollFactor.set();
 		hintText.setFormat('VCR OSD Mono', 24, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		hintText.screenCenter();
@@ -454,6 +496,22 @@ class MainMenuState extends MusicBeatState
 		maybeUnlockExtrasMenu();
 		curDifficulty = getHardDifficultyIndex();
 		startSecretSong(realitySongName);
+	}
+
+	function handleNerdUnlock():Void
+	{
+		if (FlxG.save.data.nerdUnlockEligible != true)
+		{
+			showEllaLockedOverlay('UH OH!\n\nYou must beat REALVANCY with no misses first.');
+			return;
+		}
+		if (FlxG.save.data.nerdUnlock != true)
+		{
+			FlxG.save.data.nerdUnlock = true;
+			FlxG.save.flush();
+		}
+		maybeUnlockExtrasMenu();
+		startSecretSong(nerdSongName);
 	}
 
 	function getHardDifficultyIndex():Int
@@ -509,47 +567,72 @@ class MainMenuState extends MusicBeatState
 		}
 		selectedSomethin = true;
 
-		if (ClientPrefs.data.flashing)
-			FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+		if (ClientPrefs.data.flashing && magenta != null)
+			FlxTween.tween(magenta, {alpha: 0.35}, 0.12, {ease: FlxEase.quadOut, type: PINGPONG});
 
-		FlxFlicker.flicker(menuItems.members[curSelected], 1, 0.06, false, false, function(flick:FlxFlicker)
-		{
-			switch (optionShit[curSelected])
-			{
-				case 'play':
-					startPlayWeek();
-				case 'freeplay':
-					MusicBeatState.switchState(new FreeplayState());
-				case 'ost':
-					MusicBeatState.switchState(new OSTState());
-				case 'extras':
-					MusicBeatState.switchState(new ExtrasState());
-				case 'credits':
-					MusicBeatState.switchState(new CreditsState());
-				case 'options':
-					MusicBeatState.switchState(new OptionsState());
-					OptionsState.onPlayState = false;
-					if (PlayState.SONG != null)
-					{
-						PlayState.SONG.arrowSkin = null;
-						PlayState.SONG.splashSkin = null;
-						PlayState.stageUI = 'normal';
-					}
-			}
-		});
-
+		var selectedItem:FlxSprite = menuItems.members[curSelected];
 		for (i in 0...menuItems.members.length)
 		{
-			if (i == curSelected)
+			var item = menuItems.members[i];
+			if (item == null || i == curSelected)
 				continue;
-			FlxTween.tween(menuItems.members[i], {alpha: 0}, 0.4, {
+
+			FlxTween.tween(item, {alpha: 0}, 0.24, {
 				ease: FlxEase.quadOut,
-				onComplete: function(twn:FlxTween)
+				onComplete: function(_)
 				{
-					menuItems.members[i].kill();
+					item.kill();
 				}
 			});
 		}
+
+		if (selectedItem != null)
+		{
+			selectedItem.animation.play('selected');
+			selectedItem.centerOffsets();
+			selectedItem.updateHitbox();
+			FlxTween.tween(selectedItem, {
+				x: (FlxG.width - selectedItem.width) * 0.5,
+				y: (FlxG.height - selectedItem.height) * 0.5
+			}, 0.28, {
+				ease: FlxEase.quadOut,
+				onComplete: function(_)
+				{
+					runSelectedOption();
+				}
+			});
+		}
+		else
+		{
+			runSelectedOption();
+		}
+	}
+
+	function runSelectedOption():Void
+	{
+		switch (optionShit[curSelected])
+		{
+			case 'play':
+				startPlayWeek();
+			case 'freeplay':
+				MusicBeatState.switchState(new FreeplayState());
+			case 'ost':
+				MusicBeatState.switchState(new OSTState());
+			case 'extras':
+				MusicBeatState.switchState(new ExtrasState());
+			case 'credits':
+				MusicBeatState.switchState(new CreditsState());
+			case 'options':
+				MusicBeatState.switchState(new OptionsState());
+				OptionsState.onPlayState = false;
+				if (PlayState.SONG != null)
+				{
+					PlayState.SONG.arrowSkin = null;
+					PlayState.SONG.splashSkin = null;
+					PlayState.stageUI = 'normal';
+				}
+		}
+
 	}
 
 	function initPlayWeekData():Void
