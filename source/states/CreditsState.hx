@@ -313,7 +313,7 @@ class CreditsState extends MusicBeatState
 		hazeQuestionStartY = -1;
 		hazeQuestionEndY = -1;
 
-		if (creditsStuff[curSelected][0] != 'Haze_Art') return;
+		if (creditsStuff[curSelected] == null || creditsStuff[curSelected][0] == null || creditsStuff[curSelected][0].toLowerCase() != 'haze') return;
 		var desc:String = creditsStuff[curSelected][2];
 		var questionIndex:Int = desc.indexOf('???');
 		if (questionIndex < 0) return;
