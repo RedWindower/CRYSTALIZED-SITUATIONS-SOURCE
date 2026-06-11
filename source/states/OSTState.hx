@@ -1,6 +1,7 @@
 package states;
 
 import backend.Paths;
+import backend.Song;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
@@ -52,6 +53,11 @@ class OSTState extends MusicBeatState
 	var rightArrowScaleTween:FlxTween;
 	var leftArrowBaseX:Float = 0;
 	var rightArrowBaseX:Float = 0;
+	var baseCamZoom:Float = 1;
+	var currentTrackBpm:Float = 120;
+	var beatPulseTimer:Float = 0;
+	var camBumpTween:FlxTween;
+	var trackBpmCache:Map<String, Float> = [];
 	var previewDuration:Float = 6;
 	var isPlayingFull:Bool = false;
 	var isPaused:Bool = false;
@@ -92,6 +98,8 @@ class OSTState extends MusicBeatState
 		helpText.scrollFactor.set();
 		add(helpText);
 
+		baseCamZoom = FlxG.camera != null ? FlxG.camera.zoom : 1;
+
 		updateSelection();
 		updateNowPlaying();
 		updateHelpText();
@@ -122,6 +130,8 @@ class OSTState extends MusicBeatState
 			else
 				cdSprite.angle = FlxMath.lerp(cdSprite.angle, 0, Math.min(elapsed * 8, 1));
 		}
+
+		updateBeatBump(elapsed);
 
 		if (controls.BACK)
 		{
@@ -245,6 +255,8 @@ class OSTState extends MusicBeatState
 		else
 			FlxG.sound.playMusic(Paths.music(track.name), 1, loopEnabled);
 
+		setCurrentTrackBpm(track);
+
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		updateNowPlaying();
 	}
@@ -264,6 +276,8 @@ class OSTState extends MusicBeatState
 		else
 			FlxG.sound.playMusic(Paths.music(track.name), 0.7, false);
 
+		setCurrentTrackBpm(track);
+
 		nowPlayingText.text = 'Preview: ' + track.name.toUpperCase();
 		updateBackgroundColor(track.color);
 		previewTimer = new FlxTimer().start(previewDuration, function(_)
@@ -280,6 +294,14 @@ class OSTState extends MusicBeatState
 		clearPreview();
 		isPlayingFull = false;
 		isPaused = false;
+		beatPulseTimer = 0;
+		if (camBumpTween != null)
+		{
+			camBumpTween.cancel();
+			camBumpTween = null;
+		}
+		if (FlxG.camera != null)
+			FlxG.camera.zoom = baseCamZoom;
 		updateBackgroundColor((tracks.length > 0) ? tracks[curSelected].color : DEFAULT_BG_COLOR);
 		updateNowPlaying();
 	}
@@ -495,5 +517,80 @@ class OSTState extends MusicBeatState
 	function isMusicActive():Bool
 	{
 		return FlxG.sound.music != null && FlxG.sound.music.playing && !isPaused;
+	}
+
+	function updateBeatBump(elapsed:Float):Void
+	{
+		if (FlxG.camera == null)
+			return;
+
+		if (!isMusicActive())
+		{
+			beatPulseTimer = 0;
+			FlxG.camera.zoom = FlxMath.lerp(FlxG.camera.zoom, baseCamZoom, Math.min(elapsed * 8, 1));
+			return;
+		}
+
+		var beatInterval:Float = 60 / Math.max(1, currentTrackBpm);
+		beatPulseTimer += elapsed;
+		while (beatPulseTimer >= beatInterval)
+		{
+			beatPulseTimer -= beatInterval;
+			triggerBeatBump();
+		}
+	}
+
+	function triggerBeatBump():Void
+	{
+		if (FlxG.camera == null)
+			return;
+
+		if (camBumpTween != null)
+			camBumpTween.cancel();
+
+		FlxG.camera.zoom = baseCamZoom + 0.02;
+		camBumpTween = FlxTween.tween(FlxG.camera, {zoom: baseCamZoom}, 0.14, {
+			ease: FlxEase.sineOut,
+			onComplete: function(_)
+			{
+				camBumpTween = null;
+			}
+		});
+	}
+
+	function setCurrentTrackBpm(track:OSTTrack):Void
+	{
+		currentTrackBpm = resolveTrackBpm(track);
+		beatPulseTimer = 0;
+	}
+
+	function resolveTrackBpm(track:OSTTrack):Float
+	{
+		if (track == null)
+			return 120;
+
+		if (trackBpmCache.exists(track.name))
+			return trackBpmCache.get(track.name);
+
+		var bpm:Float = 120;
+		if (track.isSong)
+		{
+			for (candidate in [track.name, track.name + '-hard', track.name + '-mechanics'])
+			{
+				try
+				{
+					var songData = Song.loadFromJson(candidate, track.name);
+					if (songData != null && songData.bpm > 0)
+					{
+						bpm = songData.bpm;
+						break;
+					}
+				}
+				catch (_:Dynamic) {}
+			}
+		}
+
+		trackBpmCache.set(track.name, bpm);
+		return bpm;
 	}
 }
